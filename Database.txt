@@ -1,0 +1,47 @@
+1.Membuat database
+CREATE DATABASE myshop;
+
+2.Membuat tabel di dalam database
+
+CREATE TABLE users ( 
+id_users INTEGER(8) AUTO_INCREMENT PRIMARY KEY,
+name varchar(255),
+email varchar(255),
+password varchar(255) 
+); 
+CREATE TABLE categories(
+    id_categories INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name varchar(255)
+);
+CREATE TABLE items( 
+id_item INTEGER AUTO_INCREMENT PRIMARY KEY, 
+name_item varchar(255), 
+description varchar(255), 
+price integer, 
+stock integer, 
+id_categories integer(8) not null, 
+FOREIGN KEY(id_categories) REFERENCES categories (id_categories) 
+);
+
+3.Memasukan data pada tabel
+User 
+INSERT INTO USERS (name,email,password) values ("Nur atika","nuratika190103@gimail.com","123");
+Categories
+INSERT INTO categories( name ) VALUES ("gadget"), ("cloth"), ("men"), ("women"),("branded");
+Item
+INSERT INTO items( name_item, description, price, stock, id_categories ) VALUES ("Sumsang b50", "hape keren dari merek sumsang", 4000000, 100, 1), ("Uniklooh", "baju keren dari brand ternama", 500000, 50, 2), ("IMHO Watch", "jam tangan anak yang jujur banget", 2000000, 10, 1
+);
+4. Mengambil data dari database
+A. MENGAMBIL DATA USERS KECUALI PASSWORD
+SELECT id_users, name, email FROM users;
+B. MENGAMBIL DATA ITEMS
+query untuk mendapatkan data item pada table items yang memiliki harga di atas 1000000
+SELECT *FROM items WHERE price >1000000;
+sebuah query untuk mengambil data item pada table items yang memiliki name serupa atau mirip (like) dengan kata kunci
+SELECT * FROM items WHERE name_item LIKE "Sumsang b50";
+C.MENAMPILKAN DATA ITEMS JOIN DENGAN CATEGORIES
+SELECT items.name_item, items.description, items.price, items.stock, items.id_categories, categories.name FROM items INNER JOIN categories ON items.id_categories = categories.id_categories;
+5.Mengubah Data dari Database
+UPDATE items SET price =2500000 WHERE id_item =1;
+
+
